@@ -1,0 +1,33 @@
+package com.example.tripease.Entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Driver {
+
+    @Id
+    private int driverId;
+    private String name;
+    private int age;
+    private String emailId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name =  "driver_id")
+    List<Booking> bookingList = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cab_id")
+    Cab cab;
+
+}
